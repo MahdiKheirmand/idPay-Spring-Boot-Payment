@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="header" style="margin-top: 2%">
+    <nav class="btn-g" style="float: left; font-size: 20px">
+        <div>
+            <ul>
+                <li>
+                    <a th:href="@{/}">خانه</a>
+                </li>
+                <li>
+                    <a th:href="@{/payments}">پرداخت ها</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div th:fragment="footer">
+
+</div>
+</body>
+</html>

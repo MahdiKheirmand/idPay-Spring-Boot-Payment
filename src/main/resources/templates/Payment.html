@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>پرداخت</title>
+    <style>
+        img {
+            width: 70%;
+            height: 10%;
+            margin-left: 15%;
+        }
+
+        body {
+            background: #ccffcc;
+            height: 60%;
+            width: 100%;
+        }
+    </style>
+</head>
+<!--<body style="background-image: url('../static/Screenshot(675).png'); background-repeat: no-repeat; height: 60%; width: 100%; margin-left: 23%; margin-top: 7%">-->
+
+<body>
+
+<h1 style="text-align: center; margin-top: 2%">پرداخت</h1>
+
+<div th:replace="layout::header"></div>
+
+
+<section style="margin-left: 25%; margin-top: 3%; ">
+    <div class="container align-center">
+        <div class="row justify-content-md-center">
+            <div class="mbr-white col-md-10">
+                <h3 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1">این وب سرویس به عنوان تست برای درگاه پرداخت ساخته شده است.</h3>
+                <!--                <div class="mbr-subscribe input-group">-->
+                <form th:action="@{/pay}" method="POST">
+                    <div class="input-group">
+                        <input class="input--style-3" type="number" placeholder="مقدار(ريال)" name="amount">
+                    </div>
+                    </br>
+                    <div class="p-t-10">
+                        <button class="btn btn--pill btn--green" type="submit">Submit</button>
+                    </div>
+                </form>
+                <!--                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="mbr-arrow hidden-sm-down" aria-hidden="true">
+        <a href="#next">
+            <i class="mbri-down mbr-iconfont"></i>
+        </a>
+    </div>
+</section>
+</body>
+</html>

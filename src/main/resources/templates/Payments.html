@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>پرداخت ها</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            margin-left: 10%;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        body {
+            background-color: #ccebff;
+        }
+    </style>
+</head>
+<body>
+
+
+<h1 style="text-align: center; margin-top: 2%">پرداخت ها</h1>
+
+<div th:replace="layout::header"></div>
+
+
+<table style="margin-top: 3%">
+    <thead>
+        <tr>
+            <th>مقدار(ریال)</th>
+            <th>تاریخ</th>
+            <th>موفق</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="payment : ${payments}">
+            <th th:text="${payment.getAmount()}"></th>
+            <th th:text="${payment.getDate()}"></th>
+            <th th:text="${payment.isFinished()}"></th>
+        </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>

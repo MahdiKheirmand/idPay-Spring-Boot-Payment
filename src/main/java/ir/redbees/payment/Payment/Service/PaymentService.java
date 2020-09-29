@@ -50,6 +50,7 @@ public class PaymentService {
                 System.out.println("Response Ok");
                 handleSuccessPaymentRs(payment, response);
                 paymentRepository.save(payment);
+                response.body().close();
                 return payment.getLink();
             } else {
                 IdPayStatus status = IdPayStatus.fromCode(response.code());
@@ -60,6 +61,7 @@ public class PaymentService {
                     }
                 }
                 System.out.println("Response NOK");
+                response.body().close();
                 return "link";
             }
         }
@@ -96,7 +98,11 @@ public class PaymentService {
                 .addHeader("Content-Type", "application/json")
                 .build();
 
-        return client.newCall(request).execute();
+        Response response = client.newCall(request).execute();
+        client.getDispatcher().getExecutorService().shutdown();
+        client.getConnectionPool().evictAll();
+        client.getCache().close();
+        return response;
     }
 
 
@@ -151,13 +157,16 @@ public class PaymentService {
                     System.out.println("Check Verify successful");
                     payment.setFinished(true);
                     paymentRepository.save(payment);
+                    verifyResponse.body().close();
                     return true;
                 } else {
                     System.out.println("Check Verify failed");
+                    verifyResponse.body().close();
                     return false;
                 }
             } else {
                 System.out.println("Failed Verifying, The money will be deposited to buyer.");
+                verifyResponse.body().close();
                 return false;
             }
         }
@@ -180,7 +189,11 @@ public class PaymentService {
                 .addHeader(Constants.apiKey, Constants.ApiKey)
                 .addHeader("Content-Type", "application/json")
                 .build();
-        return client.newCall(request).execute();
+        Response response = client.newCall(request).execute();
+        client.getDispatcher().getExecutorService().shutdown();
+        client.getConnectionPool().evictAll();
+        client.getCache().close();
+        return response;
     }
 
     public List<PaymentsDto> getAllPayments() {
